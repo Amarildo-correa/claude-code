@@ -46,6 +46,17 @@ body {
   text-size-adjust: auto;
 }
 
+/* Texto selecionado: usa o token de acento (âmbar) já existente, não uma
+   cor nova, com texto preto por cima para manter contraste. */
+::selection {
+  background-color: var(--color-ambar);
+  color: #000;
+}
+::-moz-selection {
+  background-color: var(--color-ambar);
+  color: #000;
+}
+
 /* Hide scrollbars on the horizontal rails without disabling scroll. */
 .rail::-webkit-scrollbar {
   display: none;
