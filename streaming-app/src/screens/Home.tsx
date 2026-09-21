@@ -1,4 +1,5 @@
 import { useApp } from "../context/AppContext";
+import { posterUrl } from "../data/catalog";
 import { PosterCard } from "../components/PosterCard";
 import { Rail } from "../components/Rail";
 import { PlayIcon, BellIcon } from "../components/icons";
@@ -27,8 +28,8 @@ export function Home() {
 
       <button
         onClick={() => openTitle(hero.id)}
-        className="nova-hero-enter relative mx-5 flex h-[280px] flex-col justify-end overflow-hidden rounded-3xl p-5 text-left"
-        style={{ backgroundImage: `linear-gradient(160deg, ${hero.swatch}, ${hero.swatchTo})` }}
+        className="nova-hero-enter relative mx-5 flex h-[280px] flex-col justify-end overflow-hidden rounded-3xl bg-carvao-2 p-5 text-left"
+        style={{ backgroundImage: `url(${posterUrl(hero.id, "backdrop")})`, backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-breu via-breu/25 to-transparent" />
         <div className="relative flex flex-col gap-2">

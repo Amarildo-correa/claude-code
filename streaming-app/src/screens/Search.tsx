@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useApp } from "../context/AppContext";
+import { posterUrl } from "../data/catalog";
 import { SearchIcon } from "../components/icons";
 
 export function Search() {
@@ -64,8 +65,8 @@ export function Search() {
               className="flex flex-col gap-2 text-left active:scale-[0.97] transition-transform"
             >
               <div
-                className="h-[108px] w-full rounded-lg"
-                style={{ backgroundImage: `linear-gradient(155deg, ${t.swatch}, ${t.swatchTo})` }}
+                className="h-[108px] w-full rounded-lg bg-carvao-2"
+                style={{ backgroundImage: `url(${posterUrl(t.id)})`, backgroundSize: "cover", backgroundPosition: "center" }}
               />
               <span className="text-[12px] font-medium leading-tight text-marfim">{t.name}</span>
             </button>

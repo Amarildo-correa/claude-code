@@ -1,4 +1,4 @@
-import type { Title } from "../data/catalog";
+import { posterUrl, type Title } from "../data/catalog";
 import { useApp } from "../context/AppContext";
 import { HeartIcon } from "./icons";
 
@@ -17,8 +17,8 @@ export function PosterCard({
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       <div
-        className="relative aspect-[2/3] w-full overflow-hidden rounded-xl"
-        style={{ backgroundImage: `linear-gradient(155deg, ${title.swatch}, ${title.swatchTo})` }}
+        className="relative aspect-[2/3] w-full overflow-hidden rounded-xl bg-carvao-2"
+        style={{ backgroundImage: `url(${posterUrl(title.id)})`, backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <button
           onClick={() => openTitle(title.id)}

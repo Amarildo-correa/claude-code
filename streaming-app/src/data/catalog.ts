@@ -207,3 +207,14 @@ export const catalog: Title[] = [
 export function getTitle(id: string): Title | undefined {
   return catalog.find((t) => t.id === id);
 }
+
+// Imagens de placeholder de serviços públicos (Picsum/Pravatar), já que os
+// títulos são fictícios e não há arte de pôster real para usar.
+export function posterUrl(id: string, variant: "poster" | "backdrop" = "poster"): string {
+  const size = variant === "poster" ? "600/900" : "1600/900";
+  return `https://picsum.photos/seed/nova-${id}-${variant}/${size}`;
+}
+
+export function avatarUrl(name: string): string {
+  return `https://i.pravatar.cc/128?u=${encodeURIComponent(name)}`;
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useApp } from "../context/AppContext";
-import { getTitle } from "../data/catalog";
+import { avatarUrl, getTitle, posterUrl } from "../data/catalog";
 import { PosterCard } from "../components/PosterCard";
 import { Rail } from "../components/Rail";
 import {
@@ -35,8 +35,8 @@ export function Detail({ id }: { id: string }) {
     <div className="flex flex-col gap-7 pb-10">
       <div className="relative h-[240px] shrink-0">
         <div
-          className="absolute inset-0"
-          style={{ backgroundImage: `linear-gradient(150deg, ${title.swatch}, ${title.swatchTo})` }}
+          className="absolute inset-0 bg-carvao-2"
+          style={{ backgroundImage: `url(${posterUrl(title.id, "backdrop")})`, backgroundSize: "cover", backgroundPosition: "center" }}
         />
         <div
           className="absolute inset-0"
@@ -53,8 +53,8 @@ export function Detail({ id }: { id: string }) {
 
       <div className="-mt-[108px] flex gap-4 px-5">
         <div
-          className="h-[168px] w-[112px] shrink-0 rounded-xl shadow-[0_14px_28px_rgba(0,0,0,0.45)]"
-          style={{ backgroundImage: `linear-gradient(155deg, ${title.swatch}, ${title.swatchTo})` }}
+          className="h-[168px] w-[112px] shrink-0 rounded-xl bg-carvao-2 shadow-[0_14px_28px_rgba(0,0,0,0.45)]"
+          style={{ backgroundImage: `url(${posterUrl(title.id)})`, backgroundSize: "cover", backgroundPosition: "center" }}
         />
         <div className="flex flex-col justify-end gap-1.5 pb-1">
           {title.original && <span className="text-[12px] font-medium text-ambar">Original Nova</span>}
@@ -110,8 +110,8 @@ export function Detail({ id }: { id: string }) {
           {title.cast.map((name) => (
             <div key={name} className="flex flex-col items-center gap-1.5 w-16">
               <div
-                className="h-12 w-12 rounded-full"
-                style={{ backgroundImage: `linear-gradient(155deg, ${title.swatch}, ${title.swatchTo})` }}
+                className="h-12 w-12 rounded-full bg-carvao-2"
+                style={{ backgroundImage: `url(${avatarUrl(name)})`, backgroundSize: "cover", backgroundPosition: "center" }}
               />
               <span className="text-center text-[11px] leading-tight text-areia">{name}</span>
             </div>
@@ -139,8 +139,8 @@ export function Detail({ id }: { id: string }) {
                 <div key={ep.number} className="flex items-center gap-3 border-b border-linha py-3.5 last:border-none">
                   <span className="w-5 font-display text-[16px] font-semibold text-areia-dim">{ep.number}</span>
                   <div
-                    className="h-[54px] w-[96px] shrink-0 rounded-lg"
-                    style={{ backgroundImage: `linear-gradient(155deg, ${title.swatch}, ${title.swatchTo})` }}
+                    className="h-[54px] w-[96px] shrink-0 rounded-lg bg-carvao-2"
+                    style={{ backgroundImage: `url(${posterUrl(`${title.id}-ep${ep.number}`, "backdrop")})`, backgroundSize: "cover", backgroundPosition: "center" }}
                   />
                   <div className="flex flex-1 flex-col gap-0.5">
                     <div className="flex items-baseline gap-2">
