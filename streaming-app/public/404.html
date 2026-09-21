@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Nova</title>
+    <!--
+      GitHub Pages não tem rewrite de servidor para SPAs: uma rota como
+      /claude-code/titulo/rota-42 não existe como arquivo, então o GitHub
+      serve este 404.html. Ele redireciona para a raiz do site codificando
+      o caminho original numa query string; o script em index.html restaura
+      esse caminho com history.replaceState antes do app renderizar.
+      (padrão bem conhecido: rafgraph/spa-github-pages)
+    -->
+    <script>
+      var pathSegmentsToKeep = 1; // mantém "/claude-code" (nome do repositório)
+      var l = window.location;
+      l.replace(
+        l.protocol + "//" + l.hostname + (l.port ? ":" + l.port : "") +
+        l.pathname.split("/").slice(0, 1 + pathSegmentsToKeep).join("/") + "/?/" +
+        l.pathname.slice(1).split("/").slice(pathSegmentsToKeep).join("/").replace(/&/g, "~and~") +
+        (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
