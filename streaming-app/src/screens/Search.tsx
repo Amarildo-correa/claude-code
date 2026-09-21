@@ -29,19 +29,19 @@ export function Search() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Títulos, gêneros..."
-          className="w-full bg-transparent text-[0.9375rem] text-marfim placeholder:text-areia-dim focus:outline-none"
+          className="w-full bg-transparent text-[1rem] text-marfim placeholder:text-areia-dim focus:outline-none"
         />
       </label>
 
       {query.trim() === "" && (
         <div className="flex flex-col gap-3">
-          <span className="text-[0.8125rem] text-areia">Sugestões de gênero</span>
+          <span className="text-[1rem] text-areia">Sugestões de gênero</span>
           <div className="flex flex-wrap gap-2">
             {sugestoes.map((g) => (
               <button
                 key={g}
                 onClick={() => setQuery(g)}
-                className="rounded-full border border-linha px-3.5 py-1.5 text-[0.8125rem] text-marfim"
+                className="rounded-full border border-linha px-3.5 py-1.5 text-[1rem] text-marfim"
               >
                 {g}
               </button>
@@ -51,7 +51,7 @@ export function Search() {
       )}
 
       {query.trim() !== "" && results.length === 0 && (
-        <p className="text-[0.875rem] text-areia">
+        <p className="text-[1rem] text-areia">
           Nada encontrado para “{query}”. Tente o nome do título ou um gênero.
         </p>
       )}
@@ -68,7 +68,7 @@ export function Search() {
                 className="h-[108px] w-full rounded-lg bg-carvao-2"
                 style={{ backgroundImage: `url(${posterUrl(t.id)})`, backgroundSize: "cover", backgroundPosition: "center" }}
               />
-              <span className="text-[0.75rem] font-medium leading-tight text-marfim">{t.name}</span>
+              <span className="text-[1rem] font-medium leading-tight text-marfim">{t.name}</span>
             </button>
           ))}
         </div>

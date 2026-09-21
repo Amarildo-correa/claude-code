@@ -13,7 +13,7 @@ export function MyList() {
       {titles.length === 0 ? (
         <div className="flex flex-col items-center gap-3 rounded-2xl border border-linha px-6 py-12 text-center">
           <HeartIcon width={28} height={28} className="text-areia-dim" />
-          <p className="text-[0.875rem] text-areia">
+          <p className="text-[1rem] text-areia">
             Toque no coração de um título para guardá-lo aqui.
           </p>
         </div>

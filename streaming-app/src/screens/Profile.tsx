@@ -4,7 +4,7 @@ function Row({ Icon, label }: { Icon: typeof BellIcon; label: string }) {
   return (
     <button className="flex items-center gap-3 border-b border-linha py-4 text-left last:border-none">
       <Icon width={18} height={18} className="text-areia" />
-      <span className="flex-1 text-[0.9375rem] text-marfim">{label}</span>
+      <span className="flex-1 text-[1rem] text-marfim">{label}</span>
       <ChevronLeftIcon width={16} height={16} className="rotate-180 text-areia-dim" />
     </button>
   );
@@ -21,7 +21,7 @@ export function Profile() {
         </div>
         <div className="flex flex-col">
           <span className="text-[1rem] font-medium text-marfim">Mariana</span>
-          <span className="text-[0.8125rem] text-areia">mariana@email.com</span>
+          <span className="text-[1rem] text-areia">mariana@email.com</span>
         </div>
       </div>
 
