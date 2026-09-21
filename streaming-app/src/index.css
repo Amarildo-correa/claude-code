@@ -95,20 +95,26 @@ html[data-transition="tab"]::view-transition-new(nova-screen) {
   animation-duration: 0.22s;
 }
 
-/* Opening a title — the current screen recedes while the detail rises in. */
+/* Push (opening a title) — new screen slides in from the right, on top,
+ * while the old one shifts partway left underneath for a bit of depth. */
 html[data-transition="detail-forward"]::view-transition-old(nova-screen) {
-  animation-name: nova-recede;
+  animation-name: nova-push-old-out;
+  z-index: 1;
 }
 html[data-transition="detail-forward"]::view-transition-new(nova-screen) {
-  animation-name: nova-rise-in;
+  animation-name: nova-push-new-in;
+  z-index: 2;
 }
 
-/* Going back — the detail screen drops away, the tab screen settles back. */
+/* Back — the detail screen (on top) slides out to the right, revealing the
+ * previous screen sliding back in from the left underneath. */
 html[data-transition="detail-back"]::view-transition-old(nova-screen) {
-  animation-name: nova-drop-out;
+  animation-name: nova-pop-old-out;
+  z-index: 2;
 }
 html[data-transition="detail-back"]::view-transition-new(nova-screen) {
-  animation-name: nova-settle-in;
+  animation-name: nova-pop-new-in;
+  z-index: 1;
 }
 
 @keyframes nova-fade-out {
@@ -127,44 +133,41 @@ html[data-transition="detail-back"]::view-transition-new(nova-screen) {
     opacity: 1;
   }
 }
-@keyframes nova-recede {
+@keyframes nova-push-old-out {
   from {
-    opacity: 1;
-    transform: scale(1);
+    transform: translateX(0);
+    filter: brightness(1);
   }
   to {
-    opacity: 0;
-    transform: scale(0.96);
+    transform: translateX(-22%);
+    filter: brightness(0.7);
   }
 }
-@keyframes nova-rise-in {
+@keyframes nova-push-new-in {
   from {
-    opacity: 0;
-    transform: translateY(28px) scale(1.02);
+    transform: translateX(100%);
   }
   to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(0);
   }
 }
-@keyframes nova-drop-out {
+@keyframes nova-pop-old-out {
   from {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
+    filter: brightness(1);
   }
   to {
-    opacity: 0;
-    transform: translateY(28px);
+    transform: translateX(100%);
   }
 }
-@keyframes nova-settle-in {
+@keyframes nova-pop-new-in {
   from {
-    opacity: 0;
-    transform: scale(0.96);
+    transform: translateX(-22%);
+    filter: brightness(0.7);
   }
   to {
-    opacity: 1;
-    transform: scale(1);
+    transform: translateX(0);
+    filter: brightness(1);
   }
 }
 
