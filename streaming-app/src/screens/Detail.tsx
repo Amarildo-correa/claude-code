@@ -16,6 +16,36 @@ export function Detail({ id }: { id: string }) {
   const { catalog, goBack, toggleMyList, isInMyList } = useApp();
   const title = getTitle(id);
   const [episodesOpen, setEpisodesOpen] = useState(true);
+  const [shareState, setShareState] = useState<"idle" | "copied" | "error">("idle");
+
+  async function handleShare() {
+    if (!title) return;
+    const shareData = {
+      title: `${title.name} — Nova`,
+      text: title.tagline,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        if ((err as DOMException).name !== "AbortError") {
+          setShareState("error");
+          setTimeout(() => setShareState("idle"), 2000);
+        }
+      }
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(shareData.url);
+      setShareState("copied");
+    } catch {
+      setShareState("error");
+    }
+    setTimeout(() => setShareState("idle"), 2000);
+  }
 
   if (!title) {
     return (
@@ -93,12 +123,23 @@ export function Detail({ id }: { id: string }) {
           >
             <HeartIcon filled={saved} width={17} height={17} className={saved ? "text-ambar" : "text-marfim"} />
           </button>
-          <button
-            aria-label="Compartilhar"
-            className="flex h-11 w-11 items-center justify-center rounded-xl border border-linha"
-          >
-            <ShareIcon width={17} height={17} className="text-marfim" />
-          </button>
+          <div className="relative">
+            <button
+              onClick={handleShare}
+              aria-label="Compartilhar"
+              className="flex h-11 w-11 items-center justify-center rounded-xl border border-linha"
+            >
+              <ShareIcon width={17} height={17} className="text-marfim" />
+            </button>
+            {shareState !== "idle" && (
+              <span
+                role="status"
+                className="absolute -top-9 right-0 whitespace-nowrap rounded-lg bg-carvao-2 px-2.5 py-1.5 text-[12px] font-medium text-marfim shadow-[0_8px_20px_rgba(0,0,0,0.4)]"
+              >
+                {shareState === "copied" ? "Link copiado" : "Não foi possível compartilhar"}
+              </span>
+            )}
+          </div>
         </div>
 
         <p className="text-[14px] leading-relaxed text-areia">{title.synopsis}</p>
