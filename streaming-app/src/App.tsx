@@ -26,15 +26,12 @@ function Screen() {
 }
 
 function Shell() {
-  const { route } = useApp();
-  const showNav = route.screen === "tab";
-
   return (
     <div className="relative flex h-screen w-full max-w-[430px] flex-col overflow-hidden bg-breu sm:h-[860px] sm:rounded-[2.75rem] sm:border sm:border-white/5 sm:shadow-[0_40px_90px_rgba(0,0,0,0.65)]">
       <main className="flex-1 overflow-y-auto">
         <Screen />
       </main>
-      {showNav && <BottomNav />}
+      <BottomNav />
     </div>
   );
 }
