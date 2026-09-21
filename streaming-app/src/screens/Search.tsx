@@ -21,7 +21,7 @@ export function Search() {
 
   return (
     <div className="flex flex-col gap-6 px-5 pb-8 pt-5">
-      <h1 className="font-display text-[24px] font-semibold text-marfim">Buscar</h1>
+      <h1 className="font-display text-[1.5rem] font-semibold text-marfim">Buscar</h1>
 
       <label className="flex items-center gap-3 rounded-xl border border-linha bg-carvao px-4 py-3">
         <SearchIcon width={18} height={18} className="text-areia" />
@@ -29,19 +29,19 @@ export function Search() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Títulos, gêneros..."
-          className="w-full bg-transparent text-[15px] text-marfim placeholder:text-areia-dim focus:outline-none"
+          className="w-full bg-transparent text-[0.9375rem] text-marfim placeholder:text-areia-dim focus:outline-none"
         />
       </label>
 
       {query.trim() === "" && (
         <div className="flex flex-col gap-3">
-          <span className="text-[13px] text-areia">Sugestões de gênero</span>
+          <span className="text-[0.8125rem] text-areia">Sugestões de gênero</span>
           <div className="flex flex-wrap gap-2">
             {sugestoes.map((g) => (
               <button
                 key={g}
                 onClick={() => setQuery(g)}
-                className="rounded-full border border-linha px-3.5 py-1.5 text-[13px] text-marfim"
+                className="rounded-full border border-linha px-3.5 py-1.5 text-[0.8125rem] text-marfim"
               >
                 {g}
               </button>
@@ -51,7 +51,7 @@ export function Search() {
       )}
 
       {query.trim() !== "" && results.length === 0 && (
-        <p className="text-[14px] text-areia">
+        <p className="text-[0.875rem] text-areia">
           Nada encontrado para “{query}”. Tente o nome do título ou um gênero.
         </p>
       )}
@@ -68,7 +68,7 @@ export function Search() {
                 className="h-[108px] w-full rounded-lg bg-carvao-2"
                 style={{ backgroundImage: `url(${posterUrl(t.id)})`, backgroundSize: "cover", backgroundPosition: "center" }}
               />
-              <span className="text-[12px] font-medium leading-tight text-marfim">{t.name}</span>
+              <span className="text-[0.75rem] font-medium leading-tight text-marfim">{t.name}</span>
             </button>
           ))}
         </div>

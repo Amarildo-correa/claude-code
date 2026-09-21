@@ -46,8 +46,8 @@ export function Detail({ id }: { id: string }) {
   if (!title) {
     return (
       <div className="flex flex-col items-center gap-3 px-5 py-16 text-center">
-        <p className="text-[14px] text-areia">Este título não está mais disponível.</p>
-        <button onClick={goBack} className="text-[14px] font-medium text-ambar">
+        <p className="text-[0.875rem] text-areia">Este título não está mais disponível.</p>
+        <button onClick={goBack} className="text-[0.875rem] font-medium text-ambar">
           Voltar
         </button>
       </div>
@@ -83,14 +83,14 @@ export function Detail({ id }: { id: string }) {
           style={{ backgroundImage: `url(${posterUrl(title.id)})`, backgroundSize: "cover", backgroundPosition: "center" }}
         />
         <div className="flex flex-col justify-end gap-1.5 pb-1">
-          {title.original && <span className="text-[12px] font-medium text-ambar">Original Nova</span>}
-          <h1 className="font-display text-[22px] font-semibold leading-tight text-marfim">{title.name}</h1>
+          {title.original && <span className="text-[0.75rem] font-medium text-ambar">Original Nova</span>}
+          <h1 className="font-display text-[1.375rem] font-semibold leading-tight text-marfim">{title.name}</h1>
         </div>
       </div>
 
       <div className="flex flex-col gap-5 px-5">
-        <div className="flex items-center gap-2 text-[13px] text-areia">
-          <span className="rounded border border-linha px-1.5 py-0.5 text-[11px] font-medium text-marfim">
+        <div className="flex items-center gap-2 text-[0.8125rem] text-areia">
+          <span className="rounded border border-linha px-1.5 py-0.5 text-[0.6875rem] font-medium text-marfim">
             {title.rating}
           </span>
           <span>{title.year}</span>
@@ -100,14 +100,14 @@ export function Detail({ id }: { id: string }) {
 
         <div className="flex flex-wrap gap-2">
           {title.genres.map((g) => (
-            <span key={g} className="rounded-full border border-linha px-3 py-1 text-[12px] text-areia">
+            <span key={g} className="rounded-full border border-linha px-3 py-1 text-[0.75rem] text-areia">
               {g}
             </span>
           ))}
         </div>
 
         <div className="flex items-center gap-3">
-          <button className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-ambar py-3 text-[14px] font-semibold text-breu active:bg-ambar-forte">
+          <button className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-ambar py-3 text-[0.875rem] font-semibold text-breu active:bg-ambar-forte">
             <PlayIcon width={14} height={14} />
             Assistir
           </button>
@@ -130,7 +130,7 @@ export function Detail({ id }: { id: string }) {
             {shareState !== "idle" && (
               <span
                 role="status"
-                className="absolute -top-9 right-0 whitespace-nowrap rounded-lg bg-carvao-2 px-2.5 py-1.5 text-[12px] font-medium text-marfim shadow-[0_8px_20px_rgba(0,0,0,0.4)]"
+                className="absolute -top-9 right-0 whitespace-nowrap rounded-lg bg-carvao-2 px-2.5 py-1.5 text-[0.75rem] font-medium text-marfim shadow-[0_8px_20px_rgba(0,0,0,0.4)]"
               >
                 {shareState === "copied" ? "Link copiado" : "Não foi possível compartilhar"}
               </span>
@@ -138,11 +138,11 @@ export function Detail({ id }: { id: string }) {
           </div>
         </div>
 
-        <p className="text-[14px] leading-relaxed text-areia">{title.synopsis}</p>
+        <p className="text-[0.875rem] leading-relaxed text-areia">{title.synopsis}</p>
       </div>
 
       <section className="flex flex-col gap-3 px-5">
-        <h2 className="font-display text-[17px] font-semibold text-marfim">Elenco</h2>
+        <h2 className="font-display text-[1.0625rem] font-semibold text-marfim">Elenco</h2>
         <div className="flex flex-wrap gap-x-5 gap-y-3">
           {title.cast.map((name) => (
             <div key={name} className="flex flex-col items-center gap-1.5 w-16">
@@ -150,7 +150,7 @@ export function Detail({ id }: { id: string }) {
                 className="h-12 w-12 rounded-full bg-carvao-2"
                 style={{ backgroundImage: `url(${avatarUrl(name)})`, backgroundSize: "cover", backgroundPosition: "center" }}
               />
-              <span className="text-center text-[11px] leading-tight text-areia">{name}</span>
+              <span className="text-center text-[0.6875rem] leading-tight text-areia">{name}</span>
             </div>
           ))}
         </div>
@@ -162,7 +162,7 @@ export function Detail({ id }: { id: string }) {
             onClick={() => setEpisodesOpen((v) => !v)}
             className="flex items-center justify-between"
           >
-            <h2 className="font-display text-[17px] font-semibold text-marfim">Temporada 1</h2>
+            <h2 className="font-display text-[1.0625rem] font-semibold text-marfim">Temporada 1</h2>
             <ChevronDownIcon
               width={16}
               height={16}
@@ -174,17 +174,17 @@ export function Detail({ id }: { id: string }) {
             <div className="flex flex-col">
               {title.episodes.map((ep) => (
                 <div key={ep.number} className="flex items-center gap-3 border-b border-linha py-3.5 last:border-none">
-                  <span className="w-5 font-display text-[16px] font-semibold text-areia-dim">{ep.number}</span>
+                  <span className="w-5 font-display text-[1rem] font-semibold text-areia-dim">{ep.number}</span>
                   <div
                     className="h-[54px] w-[96px] shrink-0 rounded-lg bg-carvao-2"
                     style={{ backgroundImage: `url(${posterUrl(`${title.id}-ep${ep.number}`, "backdrop")})`, backgroundSize: "cover", backgroundPosition: "center" }}
                   />
                   <div className="flex flex-1 flex-col gap-0.5">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-[13.5px] font-medium text-marfim">{ep.title}</span>
-                      <span className="text-[11px] text-areia-dim">{ep.duration}</span>
+                      <span className="text-[0.84375rem] font-medium text-marfim">{ep.title}</span>
+                      <span className="text-[0.6875rem] text-areia-dim">{ep.duration}</span>
                     </div>
-                    <p className="line-clamp-2 text-[12px] leading-snug text-areia">{ep.synopsis}</p>
+                    <p className="line-clamp-2 text-[0.75rem] leading-snug text-areia">{ep.synopsis}</p>
                   </div>
                   <button aria-label="Baixar episódio" className="text-marfim">
                     <DownloadIcon width={16} height={16} />

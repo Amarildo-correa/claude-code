@@ -24,7 +24,7 @@ export function BottomNav() {
             aria-current={isActive ? "page" : undefined}
           >
             <Icon width={20} height={20} className={isActive ? "text-ambar" : "text-areia"} />
-            <span className={`text-[10px] ${isActive ? "font-semibold text-marfim" : "text-areia"}`}>{label}</span>
+            <span className={`text-[0.625rem] ${isActive ? "font-semibold text-marfim" : "text-areia"}`}>{label}</span>
             <span className={`h-[3px] w-[3px] rounded-full ${isActive ? "bg-ambar" : "bg-transparent"}`} />
           </button>
         );

@@ -18,7 +18,7 @@ export function Home() {
   return (
     <div className="flex flex-col gap-8 pb-8">
       <header className="flex items-center justify-between px-5 pt-5">
-        <span className="font-display text-[22px] font-semibold tracking-tight text-marfim">
+        <span className="font-display text-[1.375rem] font-semibold tracking-tight text-marfim">
           Nova
         </span>
         <button aria-label="Notificações" className="text-areia">
@@ -28,19 +28,19 @@ export function Home() {
 
       <button
         onClick={() => openTitle(hero.id)}
-        className="nova-hero-enter relative mx-5 flex h-[280px] flex-col justify-end overflow-hidden rounded-3xl bg-carvao-2 p-5 text-left"
+        className="nova-hero-enter relative mx-5 flex min-h-[280px] flex-col justify-end overflow-hidden rounded-3xl bg-carvao-2 p-5 text-left"
         style={{ backgroundImage: `url(${posterUrl(hero.id, "backdrop")})`, backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-breu via-breu/25 to-transparent" />
         <div className="relative flex flex-col gap-2">
           {hero.original && (
-            <span className="text-[12px] font-medium text-ambar">Original Nova</span>
+            <span className="text-[0.75rem] font-medium text-ambar">Original Nova</span>
           )}
-          <h1 className="font-display text-[32px] font-semibold italic leading-[1.05] text-marfim">
+          <h1 className="font-display text-[2rem] font-semibold italic leading-[1.05] text-marfim">
             {hero.name}
           </h1>
-          <p className="max-w-[240px] text-[13px] leading-snug text-areia">{hero.tagline}</p>
-          <span className="mt-3 inline-flex w-fit items-center gap-2 rounded-full bg-ambar px-4 py-2 text-[13px] font-semibold text-breu">
+          <p className="max-w-[240px] text-[0.8125rem] leading-snug text-areia">{hero.tagline}</p>
+          <span className="mt-3 inline-flex w-fit items-center gap-2 rounded-full bg-ambar px-4 py-2 text-[0.8125rem] font-semibold text-breu">
             <PlayIcon width={13} height={13} />
             Assistir
           </span>
