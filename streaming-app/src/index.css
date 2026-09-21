@@ -29,6 +29,12 @@ html,
 body,
 #root {
   height: 100%;
+  /* A página em si nunca rola — só o <main> de cada tela (overflow-y-auto)
+     é a área rolável. Isso evita o "bounce" do body arrastar a barra
+     inferior para fora da tela e corta qualquer scroll horizontal fora
+     dos carrosséis (.rail), que têm seu próprio overflow-x. */
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body {

@@ -27,8 +27,8 @@ function Screen() {
 
 function Shell() {
   return (
-    <div className="relative flex h-screen w-full max-w-[430px] flex-col overflow-hidden bg-breu sm:h-[860px] sm:rounded-[2.75rem] sm:border sm:border-white/5 sm:shadow-[0_40px_90px_rgba(0,0,0,0.65)]">
-      <main className="flex-1 overflow-y-auto">
+    <div className="relative flex h-dvh w-full max-w-[430px] flex-col overflow-hidden bg-breu sm:h-[860px] sm:rounded-[2.75rem] sm:border sm:border-white/5 sm:shadow-[0_40px_90px_rgba(0,0,0,0.65)]">
+      <main className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain">
         <Screen />
       </main>
       <BottomNav />
@@ -39,7 +39,7 @@ function Shell() {
 function App() {
   return (
     <AppProvider>
-      <div className="flex min-h-screen w-full justify-center bg-[#05060a] sm:py-6">
+      <div className="flex min-h-dvh w-full justify-center bg-[#05060a] sm:py-6">
         <Shell />
       </div>
     </AppProvider>
