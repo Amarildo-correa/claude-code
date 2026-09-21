@@ -23,6 +23,15 @@ const STORAGE_KEY = "nova.myList";
 
 type TransitionKind = "tab" | "detail-forward" | "detail-back";
 
+// A tela nova sempre começa rolada para o topo — sem isso, o snapshot que a
+// View Transition tira da tela nova herda a posição de scroll da tela
+// anterior (mesmo <main>, conteúdo trocado), o que tanto deixa a tela errada
+// visível por baixo do usuário quanto pode cortar/deslocar o conteúdo
+// durante a animação caso a tela nova seja mais curta.
+function resetScreenScroll() {
+  document.querySelector<HTMLElement>(".nova-screen")?.scrollTo(0, 0);
+}
+
 /**
  * Runs `update` inside a View Transition (with a graceful fallback for
  * browsers that don't support it yet) and stamps the navigation kind on
@@ -33,11 +42,17 @@ function navigateWithTransition(kind: TransitionKind, update: () => void) {
 
   if (typeof document.startViewTransition !== "function") {
     update();
+    resetScreenScroll();
     return;
   }
 
   root.dataset.transition = kind;
-  const transition = document.startViewTransition(() => flushSync(update));
+  const transition = document.startViewTransition(() =>
+    flushSync(() => {
+      update();
+      resetScreenScroll();
+    }),
+  );
   transition.finished.finally(() => {
     delete root.dataset.transition;
   });
