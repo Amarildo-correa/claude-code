@@ -13,8 +13,8 @@
   --color-verde: #6f9271;      /* secondary accent, used sparingly (badges only) */
   --color-linha: rgba(242, 236, 225, 0.09); /* hairline dividers */
 
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
