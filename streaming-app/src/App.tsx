@@ -39,7 +39,7 @@ function Shell() {
 function App() {
   return (
     <AppProvider>
-      <div className="flex min-h-screen w-full justify-center bg-[#050302] sm:py-6">
+      <div className="flex min-h-screen w-full justify-center bg-[#05060a] sm:py-6">
         <Shell />
       </div>
     </AppProvider>

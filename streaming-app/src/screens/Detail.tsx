@@ -66,7 +66,7 @@ export function Detail({ id }: { id: string }) {
         />
         <div
           className="absolute inset-0"
-          style={{ backgroundImage: "linear-gradient(to top, #100d0a 0%, rgba(16,13,10,0.15) 55%, rgba(16,13,10,0.05) 100%)" }}
+          style={{ backgroundImage: "linear-gradient(to top, #0a0d14 0%, rgba(10,13,20,0.15) 55%, rgba(10,13,20,0.05) 100%)" }}
         />
         <button
           onClick={goBack}

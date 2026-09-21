@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* Nova — warm analog-cinema palette. Not neon-on-black, not cream+terracotta. */
-  --color-breu: #100d0a;       /* base background — warm near-black, film-canister brown undertone */
-  --color-carvao: #1c1712;     /* elevated surface */
-  --color-carvao-2: #271f18;   /* hover / pressed surface */
-  --color-marfim: #f2ece1;     /* primary text — warm ivory, never stark white */
-  --color-areia: #a79c8b;      /* secondary text — warm grey-brown */
-  --color-areia-dim: #756b5d;  /* tertiary text / disabled */
+  /* Nova — cool near-black palette, background and text pulled toward blue. */
+  --color-breu: #0a0d14;       /* base background — cool near-black, blue undertone */
+  --color-carvao: #131a24;     /* elevated surface */
+  --color-carvao-2: #1c2534;   /* hover / pressed surface */
+  --color-marfim: #e8ecf3;     /* primary text — cool near-white, blue-leaning */
+  --color-areia: #8b96a8;      /* secondary text — blue-grey */
+  --color-areia-dim: #5c6578;  /* tertiary text / disabled */
   --color-ambar: #d98b3f;      /* primary accent — marquee-bulb marigold */
   --color-ambar-forte: #f0ad66;/* accent hover state */
   --color-verde: #6f9271;      /* secondary accent, used sparingly (badges only) */
-  --color-linha: rgba(242, 236, 225, 0.09); /* hairline dividers */
+  --color-linha: rgba(232, 236, 243, 0.09); /* hairline dividers */
 
   --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif;
