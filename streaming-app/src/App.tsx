@@ -28,7 +28,7 @@ function Screen() {
 function Shell() {
   return (
     <div className="relative flex h-dvh w-full max-w-[430px] flex-col overflow-hidden bg-breu sm:h-[860px] sm:rounded-[2.75rem] sm:border sm:border-white/5 sm:shadow-[0_40px_90px_rgba(0,0,0,0.65)]">
-      <main className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain">
+      <main className="nova-screen min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain">
         <Screen />
       </main>
       <BottomNav />

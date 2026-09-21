@@ -92,3 +92,120 @@ body {
     animation: none;
   }
 }
+
+/* ---------------------------------------------------------------------- *
+ * View Transition API — animates the swap between screens (tabs/detail). *
+ * `.nova-screen` gets its own transition group so only the content area  *
+ * crossfades/slides; the phone frame and bottom nav stay put.            *
+ * `navigateWithTransition` (AppContext.tsx) stamps `data-transition` on   *
+ * <html> before calling document.startViewTransition().                  *
+ * ---------------------------------------------------------------------- */
+.nova-screen {
+  view-transition-name: nova-screen;
+}
+
+::view-transition-group(nova-screen) {
+  animation-duration: 0.38s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(nova-screen),
+::view-transition-new(nova-screen) {
+  animation-duration: 0.32s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  mix-blend-mode: normal;
+}
+
+/* Tab bar navigation — quick crossfade, no motion. */
+html[data-transition="tab"]::view-transition-old(nova-screen) {
+  animation-name: nova-fade-out;
+  animation-duration: 0.18s;
+}
+html[data-transition="tab"]::view-transition-new(nova-screen) {
+  animation-name: nova-fade-in;
+  animation-duration: 0.22s;
+}
+
+/* Push (opening a title) — new screen slides in from the right, on top,
+ * while the old one shifts partway left underneath for a bit of depth. */
+html[data-transition="detail-forward"]::view-transition-old(nova-screen) {
+  animation-name: nova-push-old-out;
+  z-index: 1;
+}
+html[data-transition="detail-forward"]::view-transition-new(nova-screen) {
+  animation-name: nova-push-new-in;
+  z-index: 2;
+}
+
+/* Back — the detail screen (on top) slides out to the right, revealing the
+ * previous screen sliding back in from the left underneath. */
+html[data-transition="detail-back"]::view-transition-old(nova-screen) {
+  animation-name: nova-pop-old-out;
+  z-index: 2;
+}
+html[data-transition="detail-back"]::view-transition-new(nova-screen) {
+  animation-name: nova-pop-new-in;
+  z-index: 1;
+}
+
+@keyframes nova-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes nova-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes nova-push-old-out {
+  from {
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+  to {
+    transform: translateX(-22%);
+    filter: brightness(0.7);
+  }
+}
+@keyframes nova-push-new-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes nova-pop-old-out {
+  from {
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes nova-pop-new-in {
+  from {
+    transform: translateX(-22%);
+    filter: brightness(0.7);
+  }
+  to {
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
