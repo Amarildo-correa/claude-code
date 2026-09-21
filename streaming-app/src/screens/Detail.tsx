@@ -20,11 +20,7 @@ export function Detail({ id }: { id: string }) {
 
   async function handleShare() {
     if (!title) return;
-    const shareData = {
-      title: `${title.name} — Nova`,
-      text: title.tagline,
-      url: window.location.href,
-    };
+    const shareData = { url: window.location.href };
 
     if (navigator.share) {
       try {

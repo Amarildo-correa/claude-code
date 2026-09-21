@@ -7,7 +7,9 @@ export type Route = { screen: "tab"; tab: Tab } | { screen: "detalhe"; id: strin
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 export function pathForRoute(route: Route): string {
-  if (route.screen === "detalhe") return `${BASE}/titulo/${route.id}`;
+  // Barra final: casa com o arquivo estático pré-renderizado em
+  // titulo/<id>/index.html (usado pelos crawlers de redes sociais).
+  if (route.screen === "detalhe") return `${BASE}/titulo/${route.id}/`;
   switch (route.tab) {
     case "buscar":
       return `${BASE}/buscar`;
