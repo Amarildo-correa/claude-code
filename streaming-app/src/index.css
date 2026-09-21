@@ -61,3 +61,117 @@ body {
     animation: none;
   }
 }
+
+/* ---------------------------------------------------------------------- *
+ * View Transition API — animates the swap between screens (tabs/detail). *
+ * `.nova-screen` gets its own transition group so only the content area  *
+ * crossfades/slides; the phone frame and bottom nav stay put.            *
+ * `navigateWithTransition` (AppContext.tsx) stamps `data-transition` on   *
+ * <html> before calling document.startViewTransition().                  *
+ * ---------------------------------------------------------------------- */
+.nova-screen {
+  view-transition-name: nova-screen;
+}
+
+::view-transition-group(nova-screen) {
+  animation-duration: 0.38s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(nova-screen),
+::view-transition-new(nova-screen) {
+  animation-duration: 0.32s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  mix-blend-mode: normal;
+}
+
+/* Tab bar navigation — quick crossfade, no motion. */
+html[data-transition="tab"]::view-transition-old(nova-screen) {
+  animation-name: nova-fade-out;
+  animation-duration: 0.18s;
+}
+html[data-transition="tab"]::view-transition-new(nova-screen) {
+  animation-name: nova-fade-in;
+  animation-duration: 0.22s;
+}
+
+/* Opening a title — the current screen recedes while the detail rises in. */
+html[data-transition="detail-forward"]::view-transition-old(nova-screen) {
+  animation-name: nova-recede;
+}
+html[data-transition="detail-forward"]::view-transition-new(nova-screen) {
+  animation-name: nova-rise-in;
+}
+
+/* Going back — the detail screen drops away, the tab screen settles back. */
+html[data-transition="detail-back"]::view-transition-old(nova-screen) {
+  animation-name: nova-drop-out;
+}
+html[data-transition="detail-back"]::view-transition-new(nova-screen) {
+  animation-name: nova-settle-in;
+}
+
+@keyframes nova-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes nova-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes nova-recede {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+@keyframes nova-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes nova-drop-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+@keyframes nova-settle-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

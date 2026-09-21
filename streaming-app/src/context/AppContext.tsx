@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { flushSync } from "react-dom";
 import { catalog, type Title } from "../data/catalog";
 
 export type Tab = "inicio" | "buscar" | "lista" | "perfil";
@@ -18,6 +19,28 @@ interface AppContextValue {
 const AppContext = createContext<AppContextValue | null>(null);
 
 const STORAGE_KEY = "nova.myList";
+
+type TransitionKind = "tab" | "detail-forward" | "detail-back";
+
+/**
+ * Runs `update` inside a View Transition (with a graceful fallback for
+ * browsers that don't support it yet) and stamps the navigation kind on
+ * <html> so index.css can pick a matching ::view-transition-* animation.
+ */
+function navigateWithTransition(kind: TransitionKind, update: () => void) {
+  const root = document.documentElement;
+
+  if (typeof document.startViewTransition !== "function") {
+    update();
+    return;
+  }
+
+  root.dataset.transition = kind;
+  const transition = document.startViewTransition(() => flushSync(update));
+  transition.finished.finally(() => {
+    delete root.dataset.transition;
+  });
+}
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [route, setRoute] = useState<Route>({ screen: "tab", tab: "inicio" });
@@ -44,16 +67,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
       catalog,
       route,
       goTab: (tab) => {
-        history.current = [];
-        setRoute({ screen: "tab", tab });
+        navigateWithTransition("tab", () => {
+          history.current = [];
+          setRoute({ screen: "tab", tab });
+        });
       },
       openTitle: (id) => {
-        history.current = [...history.current, route];
-        setRoute({ screen: "detalhe", id });
+        navigateWithTransition("detail-forward", () => {
+          history.current = [...history.current, route];
+          setRoute({ screen: "detalhe", id });
+        });
       },
       goBack: () => {
-        const prev = history.current.pop() ?? { screen: "tab", tab: "inicio" };
-        setRoute(prev);
+        navigateWithTransition("detail-back", () => {
+          const prev = history.current.pop() ?? { screen: "tab", tab: "inicio" };
+          setRoute(prev);
+        });
       },
       myList,
       toggleMyList: (id) =>
