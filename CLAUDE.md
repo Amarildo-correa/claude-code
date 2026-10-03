@@ -1,4 +1,29 @@
+# Fonte de autoridade para apps Amazon Devices (Vega OS / Fire OS)
 
+A única fonte de autoridade para desenvolvimento em Vega OS e Fire OS é o
+MCP Amazon Devices Builder Tools (`amazon-devices-buildertools-mcp`) e as
+skills `amazon-devices-*` que ele instala. Isso vale para APIs, componentes de
+UI, foco e navegação, player de mídia/DRM, manifest, versões de React Native,
+build, deploy, desempenho e publicação.
+
+As skills `react-native-tv-best-practices` e `react-native-best-practices`
+são apenas material complementar:
+
+- Consulte-as só para assuntos que o MCP e as skills `amazon-devices-*` não
+  cobrem (por exemplo, direção de arte: cores, tipografia, hierarquia visual).
+- Nunca as use para contradizer, substituir ou "corrigir" uma orientação da
+  Amazon. Em caso de divergência, siga sempre a Amazon e descarte a sugestão
+  complementar (ex.: use o `Carousel` de `@amazon-devices/kepler-ui-components`
+  e não `FlashList`; use o media player do Vega e não `react-native-video`).
+- Antes de aplicar qualquer recomendação delas num app Vega/Fire OS, confirme
+  no MCP (`search_documentation` / `read_document`) que não há orientação
+  oficial diferente.
+
+As skills `amazon-devices-*` ficam em `~/.claude/skills` (fora do repositório,
+por serem licenciadas sob o Program Materials License Agreement da Amazon). Se
+não estiverem disponíveis numa sessão nova, reinstale com:
+
+    npx -y @amazon-devices/amazon-devices-buildertools-mcp@latest init-context
 
 ---
 
